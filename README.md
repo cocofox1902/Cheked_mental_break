@@ -13,3 +13,8 @@ And the api key with the link https://intranet.hbtn.io/dashboards/my_tools it's 
 And for the last add your password in an .env file like this
 
 ```SECRET_KEY="paswordToChange"```
+
+For the initialisation look at this video :
+
+https://youtu.be/-tJi5ULqBpU
+
