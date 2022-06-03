@@ -17,8 +17,12 @@ const options = {
 };
 const getQuote = async () => {
   await axios.request(options).then(async function (response) {
-    const result = await response.data[0]
+    const result = await response.data[0];
+    console.log("");
+    console.log("Don't mopping, keep going!");
+    console.log("");
     console.log(result.q);
+    console.log("");
     return;
   });
 };
@@ -117,24 +121,25 @@ async function ProjectCorrection() {
       let idCorrection = await correctProject(key);
       dictKeyValue["idCorrection"] = idCorrection;
       tasksCorrected++;
-      console.log("Task (" + value["title"] + ") correction asked");
+      console.log('correction asked for the task "' + value["title"] + '"');
     } else {
       dictKeyValue["idCorrection"] = undefined;
-      console.log(
-        "🚀 Task (" + value["title"] + ") skipped no checker available"
-      );
+      console.log('No checker for task "' + value["title"] + '"');
     }
     dictTasks[key] = dictKeyValue;
   }
-  console.log("In waiting...");
+  console.log("");
+  console.log("In waiting... Take a coffee");
+  console.log("");
   await new Promise((resolve) => setTimeout(resolve, 20000));
-  console.log("Done correction");
+  console.log("Correction is Done");
+  console.log("");
   for (const [key, value] of Object.entries(dictTasks)) {
     if (value["idCorrection"] != undefined) {
       const result = await checkCorrection(value["idCorrection"]);
       if (result.result_display.all_passed === false) {
         getQuote();
-        console.log("Task (" + value["title"] + ") failed");
+        console.log('The task "' + value["title"] + '" have failed');
         return;
       }
     }
@@ -145,7 +150,7 @@ async function ProjectCorrection() {
   } else {
     getQuote();
     console.log(
-      tasksCorrected + "/" + Object.keys(dictTasks).length + " checked!"
+      tasksCorrected + "/" + Object.keys(dictTasks).length + " task is checked"
     );
   }
 }
